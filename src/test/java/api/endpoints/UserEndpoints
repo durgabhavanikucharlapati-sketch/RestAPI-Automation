@@ -1,0 +1,29 @@
+package api.endpoints;
+
+import static io.restassured.RestAssured.given;
+
+import api.payload.User;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+
+/** Thin wrappers around HTTP calls so tests stay clean. */
+public class UserEndpoints {
+
+    /** GET /api/users?page={pageNumber} */
+    public static Response userList(String pageNumber) {
+        return given()
+                .pathParam("pageNumber", pageNumber)
+               .when()
+                .get(Routes.get_URL);
+    }
+
+    /** POST /api/users with JSON body */
+    public static Response createUser(User payload) {
+        return given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(payload)
+               .when()
+                .post(Routes.create_user_URL);
+    }
+}
