@@ -1,0 +1,12 @@
+package api.utilities;
+
+import java.util.UUID;
+
+public class TestUtil {
+    public static String generateRandomFirstName() {
+        return "First_" + UUID.randomUUID().toString().substring(0, 5);
+    }
+    public static String generateRandomLastName() {
+        return "Last_" + UUID.randomUUID().toString().substring(0, 5);
+    }
+}
