@@ -1,0 +1,35 @@
+package api.test;
+
+import api.endpoints.UserEndpoints;
+import api.payload.User;
+import api.utilities.TestUtil;
+import io.restassured.response.Response;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class UserTest {
+
+    User user;
+
+    @BeforeMethod
+    public void setUpData() {
+        user = new User();
+        user.setFirstName(TestUtil.generateRandomFirstName());
+        user.setLastName(TestUtil.generateRandomLastName());
+    }
+
+    @Test(priority = 1)
+    public void getUsersList() {
+        Response response = UserEndpoints.userList("2");
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+
+    @Test
+    public void createUser() {
+        Response response = UserEndpoints.createUser(user);
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 201);
+    }
+}
