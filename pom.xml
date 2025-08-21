@@ -8,15 +8,15 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <testng.version>7.10.2</testng.version>
     <restassured.version>5.5.0</restassured.version>
     <surefire.version>3.2.5</surefire.version>
   </properties>
 
   <dependencies>
-    <!-- Test framework: TestNG ONLY -->
+    <!-- ✅ TestNG (your test framework) -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
@@ -24,28 +24,18 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- REST API testing -->
+    <!-- ✅ RestAssured (for API testing) -->
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <version>${restassured.version}</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- (Optional) JSON assertions/helpers you might use -->
-    <!--
-    <dependency>
-      <groupId>org.skyscreamer</groupId>
-      <artifactId>jsonassert</artifactId>
-      <version>1.5.3</version>
-      <scope>test</scope>
-    </dependency>
-    -->
   </dependencies>
 
   <build>
     <plugins>
-      <!-- Compile with Java 17 -->
+      <!-- Java compiler (make sure we use Java 17 like GitHub Actions) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -55,7 +45,7 @@
         </configuration>
       </plugin>
 
-      <!-- Run TestNG tests -->
+      <!-- ✅ Surefire plugin runs your TestNG tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -64,18 +54,8 @@
           <useModulePath>false</useModulePath>
           <printSummary>true</printSummary>
           <failIfNoTests>true</failIfNoTests>
-          <!-- No suiteXmlFiles needed; it auto-detects @Test from TestNG -->
         </configuration>
       </plugin>
-
-      <!-- (Optional) Generate HTML reports locally with `mvn surefire-report:report` -->
-      <!--
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>${surefire.version}</version>
-      </plugin>
-      -->
     </plugins>
   </build>
 </project>
